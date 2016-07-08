@@ -6,10 +6,8 @@
 
 (def pipeline-def
   `(
-    manualtrigger/wait-for-manual-trigger
-    some-step-that-does-nothing
-    (in-parallel
-      some-step-that-echos-foo
-      some-step-that-echos-bar)
-    manualtrigger/wait-for-manual-trigger
-    some-failing-step))
+     (either
+       manualtrigger/wait-for-manual-trigger
+       wait-for-repo)
+     (with-repo
+       run-some-tests)))
